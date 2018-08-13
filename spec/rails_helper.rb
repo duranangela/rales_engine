@@ -26,6 +26,13 @@ require 'rspec/rails'
 # If you are not using ActiveRecord, you can remove these lines.
 begin
   ActiveRecord::Migration.maintain_test_schema!
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
