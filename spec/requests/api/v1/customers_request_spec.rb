@@ -17,7 +17,7 @@ describe "Customers API" do
 
     get "/api/v1/customers/#{id}"
 
-    item = JSON.parse(response.body)
+    customer = JSON.parse(response.body)
 
     expect(response).to be_successful
     expect(customer["id"]).to eq(id)
