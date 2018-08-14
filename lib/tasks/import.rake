@@ -7,6 +7,15 @@ namespace :import do
     CSV.foreach('db/csv/merchants.csv', headers: true) do |row|
       Merchant.create(row.to_h)
     end
+    puts "Merchants imported: #{Merchant.count}"
+  end
+  desc "Import invoices from CSV file"
+
+  task invoice: :environment do
+    CSV.foreach('db/csv/invoices.csv', headers: true) do |row|
+      Invoice.create(row.to_h)
+    end
+    puts "Invoices imported: #{Invoice.count}"
   end
 end
 
