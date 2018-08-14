@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180814143944) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,4 +41,5 @@ ActiveRecord::Schema.define(version: 20180814143944) do
 
   add_foreign_key "invoices", "customers"
   add_foreign_key "invoices", "merchants"
+
 end
