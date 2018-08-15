@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Merchants API' do
-  context 'GET /api/vi/merchants' do
+  context 'GET /api/v1/merchants' do
     it 'gets a list of all merchants' do
       create_list(:merchant, 3)
 
