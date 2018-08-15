@@ -7,4 +7,9 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
+  scope :success, -> {where(status: 'shipped')}
+
+  def self.most_expensive(limit = 5)
+  end
+
 end

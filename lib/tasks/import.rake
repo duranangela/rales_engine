@@ -26,6 +26,15 @@ namespace :import do
                      updated_at: row[:updated_at])
     end
 
+    CSV.foreach('db/csv/transactions.csv', headers: true, header_converters: :symbol) do |row|
+      Transaction.create(id: row[:id],
+        invoice_id: row[:invoice_id],
+        credit_card_number: row[:credit_card_number],
+        result: row[:result],
+        created_at: row[:created_at],
+        updated_at: row[:updated_at])
+      end
+
     CSV.foreach('db/csv/items.csv', headers: true, header_converters: :symbol) do |row|
       Item.create(id: row[:id],
                   name: row[:name],
@@ -44,13 +53,6 @@ namespace :import do
                         created_at: row[:created_at],
                         updated_at: row[:updated_at])
     end
-    CSV.foreach('db/csv/transactions.csv', headers: true, header_converters: :symbol) do |row|
-      Transaction.create(id: row[:id],
-                        invoice_id: row[:invoice_id],
-                        credit_card_number: row[:credit_card_number],
-                        result: row[:result],
-                        created_at: row[:created_at],
-                        updated_at: row[:updated_at])
-    end
+
   end
 end
