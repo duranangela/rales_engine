@@ -30,7 +30,7 @@ describe 'Merchants API' do
   end
 
   context 'GET /api/v1/merchants/:id/favorite_customer' do
-    it 'can get favorite customer by its id for a merchant' do
+    xit 'can get favorite customer by its id for a merchant' do
       merchant = create(:merchant)
       customer = create(:customer)
       customer_2 = create(:customer)
@@ -45,7 +45,27 @@ describe 'Merchants API' do
       expect(response).to be_successful
       expect(actual_response['id']).to eq(customer.id)
       expect(actual_response['first_name']).to eq(customer.first_name)
+    end
+  end
+  context 'GET /api/v1/merchants/:id/revenue' do
+    it 'can get total revenue for a merchant' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id)
+      invoice_items1 = create_list(:invoice_item, 2, item_id: item.id, invoice_id: invoice1.id, unit_price: 4, quantity: 2)
+      invoice_items2 = create_list(:invoice_item, 2, item_id: item.id, invoice_id: invoice2.id)
+      transaction1 = create(:transaction, result: "success", invoice_id: invoice1.id)
+      transaction2 = create(:transaction, result: "failed", invoice_id: invoice2.id)
 
+      get "/api/v1/merchants/#{merchant.id}/revenue"
+
+      expect(response).to be_successful
+
+      revenue = JSON.parse(response.body, symbolize_names: true)
+
+      expect(revenue).to eq(16)
     end
   end
 end
