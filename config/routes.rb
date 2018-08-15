@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show]
       # resources :merchants, path: "/api/v1/merchants/#{id}/favorite_customer"
       resources :customers, only: [:index, :show]
+      resources :invoices, only: [:index]
     end
   end
 
