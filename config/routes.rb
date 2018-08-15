@@ -5,9 +5,8 @@ Rails.application.routes.draw do
       namespace :merchants do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
+        get '/:id/favorite_customer', to: '/favorite_customer#show'
       end
-
-      get 'merchants/:id/favorite_customer', to: 'merchants/favorite_customer#show'
 
       resources :merchants, only: [:index, :show]
       resources :customers, only: [:index, :show]
