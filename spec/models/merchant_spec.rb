@@ -20,7 +20,7 @@ RSpec.describe Merchant, type: :model do
       invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
       invoice3 = create(:invoice, customer_id: customer2.id, merchant_id: merchant.id)
 
-      expected_result = customer.id
+      expected_result = customer
 
       expect(merchant.favorite_customer_for_merchant).to eq(expected_result)
     end

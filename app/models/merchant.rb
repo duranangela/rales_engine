@@ -10,6 +10,6 @@ class Merchant < ApplicationRecord
     Customer.select('customers.*, count(invoices.customer_id) AS invoice_customer').
             joins(:invoices).
             group("customers.id").
-            order('invoice_customer DESC').limit(1).first.id
+            order('invoice_customer DESC').limit(1).first
   end
 end

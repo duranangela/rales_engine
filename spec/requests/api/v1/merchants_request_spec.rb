@@ -28,4 +28,24 @@ describe 'Merchants API' do
       expect(merchant["id"]).to eq(id)
     end
   end
+
+  context 'GET /api/v1/merchants/:id/favorite_customer' do
+    it 'can get favorite customer by its id for a merchant' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      customer_2 = create(:customer)
+      invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      invoice3 = create(:invoice, customer_id: customer_2.id, merchant_id: merchant.id)
+
+      get "/api/v1/merchants/#{merchant.id}/favorite_customer"
+
+      actual_response = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(actual_response['id']).to eq(customer.id)
+      expect(actual_response['first_name']).to eq(customer.first_name)
+
+    end
+  end
 end
