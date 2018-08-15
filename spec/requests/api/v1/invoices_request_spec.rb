@@ -28,7 +28,7 @@ describe "Invoices API" do
     end
   end
 
-  context 'GET/api/v1/invoices/find?id=2' do
+  context 'GET/api/v1/invoices/find?parameters' do
     it 'can find invoice by parameter id' do
       customer1 = create(:customer)
       merchant1 = create(:merchant)
@@ -41,6 +41,18 @@ describe "Invoices API" do
 
       expect(response).to be_successful
       expect(invoice["id"]).to eq(invoice_2.id)
+    end
+    it 'can find invoice by status' do
+      customer1 = create(:customer)
+      merchant1 = create(:merchant)
+      invoice_1 = create(:invoice, id: 1, status: 'shipped', merchant_id: merchant1.id, customer_id: customer1.id)
+
+      get "/api/v1/invoices/find?status=shipped"
+
+      invoice = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(invoice["status"]).to eq(invoice_1.status)
     end
   end
 end
