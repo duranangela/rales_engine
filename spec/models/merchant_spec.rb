@@ -25,5 +25,4 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.favorite_customer_for_merchant).to eq(expected_result)
     end
   end
-
 end
