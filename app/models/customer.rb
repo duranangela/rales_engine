@@ -18,4 +18,5 @@ class Customer < ApplicationRecord
     .order('total_count desc')
     .first
   end
+
 end
