@@ -80,7 +80,7 @@ describe "Invoice Items API" do
       invoice_item = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(invoice_item.length).to eq(7)
+      expect(invoice_item.length).to eq(5)
     end
   end
 end

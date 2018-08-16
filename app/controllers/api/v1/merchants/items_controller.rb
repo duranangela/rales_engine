@@ -1,6 +1,6 @@
 class Api::V1::Merchants::ItemsController < ApplicationController
 
   def show
-    render json: Merchant.find(params[:merchant_id]).items
+    render json: Merchant.find(params[:id]).items
   end
 end

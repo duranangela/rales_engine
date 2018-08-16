@@ -41,7 +41,7 @@ describe 'Transactions API' do
       customer = create(:customer)
       merchant = create(:merchant, id: 1)
       invoice = create(:invoice, id: 1, customer_id: customer.id, merchant_id: merchant.id)
-      transaction = create_list(:transaction, 5, invoice_id: invoice.id)
+      transaction = create(:transaction, invoice_id: invoice.id)
 
       get "/api/v1/transactions/#{transaction.id}/invoice"
 
@@ -50,7 +50,7 @@ describe 'Transactions API' do
       transactions = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(invoice["id"]).to eq(1)
+      expect(transactions["id"]).to eq(1)
     end
   end
   context 'GET /api/v1/transactions/find?parameters' do

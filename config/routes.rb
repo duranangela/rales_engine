@@ -8,8 +8,10 @@ Rails.application.routes.draw do
         get '/find_all', to: 'search#index'
         get '/:id/favorite_customer', to: 'favorite_customer#show'
         get '/revenue', to: 'revenue_merchants_date#show'
-        get '/items', to: 'items#show'
-        get '/invoices', to: 'invoices#show'
+        get '/:id/revenue', to: 'revenue#show'
+        get '/:id/items', to: 'items#show'
+        get '/:id/invoices', to: 'invoices#show'
+        get '/random', to: 'random#show'
       end
 
       namespace :items do
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
       end
 
       namespace :invoices do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
         get "/:id/revenue", to: 'revenue#show'
         get "/random", to: 'random#show'
       end
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
         get '/random', to: 'random#show'
+        get '/:id/invoice', to: 'invoice#show'
       end
 
       namespace :invoice_items do
@@ -41,7 +46,8 @@ Rails.application.routes.draw do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
         get '/random', to: 'random#show'
-        get '/invoices', to: 'invoices#show'
+        get '/:id/invoices', to: 'invoices#show'
+        get '/:id/transactions', to: 'transactions#show'
       end
 
       resources :customers, only: [:index, :show]

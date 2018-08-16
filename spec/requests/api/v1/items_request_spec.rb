@@ -65,7 +65,7 @@ describe "Items API" do
       item = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(item.length).to eq(7)
+      expect(item.length).to eq(5)
     end
   end
 
