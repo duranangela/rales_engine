@@ -14,4 +14,21 @@ describe "Invoice Items API" do
       expect(response).to be_successful
     end
   end
+
+  context 'GET /api/v1/invoice_items/:id' do
+    it "can get one invoice item by its id" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      item = create(:item, merchant_id: merchant.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+      invoice_item_id = create(:invoice_item, item_id: item.id, invoice_id: invoice.id).id
+
+      get "/api/v1/invoice_items/#{invoice_item_id}"
+
+      invoice_item = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(invoice_item["id"]).to eq(invoice_item_id)
+    end
+  end
 end
