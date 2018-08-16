@@ -21,6 +21,10 @@ class Merchant < ApplicationRecord
     .sum('quantity*unit_price')
   end
 
+  def pending_invoices
+    customers.joins(invoices: :transactions).joins(:merchants).where(transactions: {result: "failed"}).group(:id)
+  end
+
   def self.revenue_merchants_on_a_date(date)
      joins(invoices: [:invoice_items, :transactions])
      .where(invoices: {updated_at: date.beginning_of_day..date.end_of_day})
