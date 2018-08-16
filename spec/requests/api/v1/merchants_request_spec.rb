@@ -72,7 +72,7 @@ describe 'Merchants API' do
 
       expect(response).to be_successful
 
-      items = JSON.parse(response.body)
+      invoices = JSON.parse(response.body)
 
       expect(invoices.count).to eq(3)
     end
