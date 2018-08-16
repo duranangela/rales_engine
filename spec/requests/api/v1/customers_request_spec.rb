@@ -39,4 +39,21 @@ describe "Customers API" do
       expect(invoices.count).to eq(5)
     end
   end
+
+  context 'GET /api/v1/customers/:id/transactions' do
+    it 'returns a collection of associated transactions' do
+      customer_1 = create(:customer)
+      merchant_1 = create(:merchant)
+      invoice_1 = create(:invoice, customer_id: customer_1.id, merchant_id: merchant_1.id)
+      create_list(:transaction, 8, invoice_id: invoice_1.id)
+
+      get "/api/v1/customers/#{customer_1.id}/transactions"
+
+      expect(response).to be_successful
+
+      transactions = JSON.parse(response.body)
+
+      expect(transactions.count).to eq(8)
+    end
+  end
 end
