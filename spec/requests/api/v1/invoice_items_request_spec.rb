@@ -48,4 +48,21 @@ describe "Invoice Items API" do
       expect(invoice_item["id"]).to eq(invoice_item_2.id)
     end
   end
+  context 'GET /api/v1/invoice_items/find_all?parameters' do
+    it "can find all invoice items by invoice id" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      item = create(:item, merchant_id: merchant.id)
+      invoice = create(:invoice, id: 1, merchant_id: merchant.id, customer_id: customer.id)
+      invoice_item_1 = create(:invoice_item, id: 1, item_id: item.id, invoice_id: invoice.id)
+      invoice_item_2 = create(:invoice_item, id: 2, item_id: item.id, invoice_id: invoice.id)
+
+      get "/api/v1/invoice_items/find_all?invoice_id=1"
+
+      invoice_item = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(invoice_item.length).to eq(2)
+    end
+  end
 end
