@@ -15,6 +15,12 @@ Rails.application.routes.draw do
         get '/:id/invoice_items', to: 'invoice_items#show'
       end
 
+      namespace :transactions do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
+      end
+
       resources :merchants, only: [:index, :show]
       resources :customers, only: [:index, :show]
       resources :invoices, only: [:index, :show]

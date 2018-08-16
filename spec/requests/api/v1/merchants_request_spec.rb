@@ -28,7 +28,18 @@ describe 'Merchants API' do
       expect(merchant["id"]).to eq(id)
     end
   end
+  context 'GET/api/v1/merchants/random.json' do
+    it 'can find a random merchant' do
+      create_list(:merchant, 4)
 
+      get "/api/v1/merchants/random"
+
+      merchant = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(merchant.count).to eq(1)
+    end
+  end
   context 'GET /api/v1/merchants/:id/favorite_customer' do
     xit 'can get favorite customer by its id for a merchant' do
       merchant = create(:merchant)
@@ -67,17 +78,5 @@ describe 'Merchants API' do
 
       expect(revenue).to eq({revenue: "0.16"})
     end
-    context 'GET/api/v1/merchants/random.json' do
-    it 'can find a random merchant' do
-      create_list(:merchant, 4)
-
-      get "/api/v1/merchants/random"
-
-      merchant = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(merchant.count).to eq(1)
-    end
-  end
   end
 end
