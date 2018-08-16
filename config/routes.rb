@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
         get '/:id/favorite_customer', to: 'favorite_customer#show'
+        get '/revenue?date=x', to: 'revenue_merchants_date#show'
+
       end
       namespace :invoices do
         get '/find', to: 'search#show'
