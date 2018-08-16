@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Items Relationships API' do
   context 'GET /api/v1/items/:id/merchant' do
     it 'gets the associated merchant for an item' do
-      merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
+      id = create(:merchant).id
+      item = create(:item, merchant_id: id)
 
       get "/api/v1/items/#{item.id}/merchant"
 
@@ -12,7 +12,7 @@ describe 'Items Relationships API' do
 
       merchant = JSON.parse(response.body)
 
-      expect(merchant["id"]).to eq(merchant.id)
+      expect(merchant["id"]).to eq(id)
     end
   end
 end
