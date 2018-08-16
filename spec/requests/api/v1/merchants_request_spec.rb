@@ -58,6 +58,37 @@ describe 'Merchants API' do
       expect(actual_response['first_name']).to eq(customer.first_name)
     end
   end
+  # relationships endpoint
+  context 'GET /api/v1/merchants/:id/items' do
+    it 'returns a collection of items associated with that merchant' do
+      merchant_1 = create(:merchant)
+      create_list(:item, 5, merchant_id: merchant_1.id)
+
+      get "/api/v1/merchants/#{merchant_1.id}/items"
+
+      expect(response).to be_successful
+
+      items = JSON.parse(response.body)
+
+      expect(items.count).to eq(5)
+    end
+  end
+  context 'GET /api/v1/merchants/:id/invoices' do
+    it 'returns a collection of invoices associated with that merchant from their known orders' do
+      merchant_1 = create(:merchant)
+      customer_1 = create(:customer)
+      create_list(:invoice, 3, merchant_id: merchant_1.id, customer_id: customer_1.id)
+
+      get "/api/v1/merchants/#{merchant_1.id}/invoices"
+
+      expect(response).to be_successful
+
+      invoices = JSON.parse(response.body)
+
+      expect(invoices.count).to eq(3)
+    end
+  end
+      
   context 'GET /api/v1/merchants/:id/revenue' do
     it 'can get total revenue for a merchant' do
       merchant = create(:merchant)
