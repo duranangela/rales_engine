@@ -6,13 +6,18 @@ Rails.application.routes.draw do
         get '/items', to: 'merchants/items#show'
         get '/invoices', to: 'merchants/invoices#show'
       end
+
       namespace :merchants do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
         get '/:id/favorite_customer', to: 'favorite_customer#show'
         get '/revenue', to: 'revenue_merchants_date#show'
-
       end
+
+      namespace :items do
+        get '/find', to: 'search#show'
+      end
+      
       namespace :invoices do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'
