@@ -65,7 +65,7 @@ describe 'Merchants API' do
 
       revenue = JSON.parse(response.body, symbolize_names: true)
 
-      expect(revenue).to eq(16)
+      expect(revenue).to eq({revenue: "0.16"})
     end
   end
 end
