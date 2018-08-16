@@ -82,7 +82,7 @@ describe "Invoices API" do
       invoice = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(invoice.length).to eq(1)
+      expect(invoice.length).to eq(4)
     end
   end
 end

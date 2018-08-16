@@ -53,13 +53,13 @@ describe 'Merchants API' do
       merchant_1 = create(:merchant)
       create_list(:item, 5, merchant_id: merchant_1.id)
 
-      get '/api/v1/merchants/:id/items'
+      get "/api/v1/merchants/#{merchant_1.id}/items"
 
       expect(response).to be_successful
 
       items = JSON.parse(response.body)
 
-      expect(items.count).to eq(3)
+      expect(items.count).to eq(5)
     end
   end
 end
