@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         get '/random', to: 'random#show'
         get '/:id/merchant', to: 'merchant#show'
         get '/:id/invoice_items', to: 'invoice_items#show'
+        get '/most_items', to: 'most_items#show'
       end
 
       namespace :invoices do
@@ -57,6 +58,7 @@ Rails.application.routes.draw do
         get '/random', to: 'random#show'
         get '/:id/invoices', to: 'invoices#show'
         get '/:id/transactions', to: 'transactions#show'
+        get '/:id/favorite_merchant', to: 'favorite_merchant#show'
       end
 
       resources :customers, only: [:index, :show]
