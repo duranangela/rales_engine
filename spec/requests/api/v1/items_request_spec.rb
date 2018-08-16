@@ -53,4 +53,20 @@ describe "Items API" do
       expect(item.length).to eq(2)
     end
   end
+
+  context 'GET/api/v1/items/random' do
+    it 'can find a random item' do
+      merchant = create(:merchant, id: 1)
+      item = create(:item, id: 1, merchant_id: merchant.id)
+      item2 = create(:item, id: 2, merchant_id: merchant.id)
+
+      get "/api/v1/items/random"
+
+      item = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(item.length).to eq(7)
+    end
+  end
+
 end
