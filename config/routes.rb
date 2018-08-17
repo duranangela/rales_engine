@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get '/:id/invoice_items', to: 'invoice_items#show'
         get '/most_items', to: 'most_items#show'
         get '/most_revenue', to: 'top_items#show'
+        get '/:id/best_day', to: 'best_day#show'
       end
 
       namespace :invoices do

@@ -10,8 +10,8 @@ class Item < ApplicationRecord
     .joins(invoices: [:invoice_items, :transactions]).where(transactions: {result: "success"})
     .group(:id)
     .order('total_items desc')
-    .limit(quantity) 
-  end 
+    .limit(quantity)
+  end
 
   def self.top_items(quantity)
     select("items.*, sum(invoice_items.quantity*invoice_items.unit_price) as revenue")
@@ -20,5 +20,16 @@ class Item < ApplicationRecord
     .group(:id)
     .order("revenue desc")
     .limit(quantity)
+  end
+
+  def best_day
+    invoices.select("sum(invoice_items.quantity) as total_quantity, invoices.*")
+    .joins(:invoice_items, :transactions)
+    .where(transactions: {result: "success"})
+    .group("date_trunc('day', invoice_items.created_at), invoices.id")
+    .order("total_quantity desc")
+    .limit(1)
+    .first
+    .created_at
   end
 end
