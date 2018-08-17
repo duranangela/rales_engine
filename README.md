@@ -1,24 +1,26 @@
-# README
+# Rales Engine
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Collaborators: Angela Duran and Claire Beauvais
 
-Things you may want to cover:
+### Summary
+This project is a Rails API app that provides json information related to an ecommerce marketplace site and responds to different queries and requests. The responses should include relevant information about the request, including records and other business intelligence opeations.
 
-* Ruby version
+The Rales Engine project is part of the back end engineering curriculum at the Turing School for Software and Design. Information related to this project can be found here: http://backend.turing.io/module3/projects/rails_engine
 
-* System dependencies
+### Setup and Installation
+To get this project on your own machine:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone down the project, or fork it into a repository of your own.
+  * ``` git clone git@github.com:duranangela/rales_engine.git```
+2. Once the project has been cloned into your folder, navigate to that folder and run
+  * `bundle install`
+  * `bundle update`
+3. Once the gems have finished updating, you can create the Postgres database and tables by running
+  * `rake db:{create,migrate}`
+4. Then seed the database with the CSV data:
+  * `rake import:all`
+5. Once the database has been seeded, you can run our RSpec test suite by running
+  * `rspec`
+6. To start and interact with the server on your local machine, run
+  * `rails s`
+7. Now you can interact with the app at localhost:3000 using the endpoints listed in the rubric above.
