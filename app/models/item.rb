@@ -5,6 +5,8 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
+  default_scope -> { order(id: :asc) }
+
   def self.most_items(quantity)
     select('items.*, count(invoice_items.item_id) as total_items')
     .joins(invoices: [:invoice_items, :transactions]).where(transactions: {result: "success"})
