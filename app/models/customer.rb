@@ -7,12 +7,19 @@ class Customer < ApplicationRecord
   has_many :merchants, through: :invoices
 
   def self.favorite_customer_for_merchant(merch_id)
-    select("customers.*, count(transactions.id) as invoice_count").joins(:invoices, :transactions, :merchants).where(transactions: {result: "success"}).where(merchants: {id: merch_id}).group(:id).order("invoice_count desc").limit(1).first
+    select("customers.*, count(transactions.id) as invoice_count")
+    .joins(:invoices, :transactions, :merchants)
+    .where(transactions: {result: "success"})
+    .where(merchants: {id: merch_id})
+    .group(:id)
+    .order("invoice_count desc")
+    .limit(1)
+    .first
   end
 
   def favorite_merchant
     merchants.select("merchants.*, count(transactions.id) as total_count")
-    .joins(invoices: [:transactions])
+    .joins(invoices: :transactions)
     .where(transactions: {result: "success"})
     .group(:id)
     .order('total_count desc')

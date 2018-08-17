@@ -40,24 +40,24 @@ describe 'Merchants API' do
       expect(merchant.count).to eq(1)
     end
   end
-  context 'GET /api/v1/merchants/:id/favorite_customer' do
-    xit 'can get favorite customer by its id for a merchant' do
-      merchant = create(:merchant)
-      customer = create(:customer)
-      customer_2 = create(:customer)
-      invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-      invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-      invoice3 = create(:invoice, customer_id: customer_2.id, merchant_id: merchant.id)
-
-      get "/api/v1/merchants/#{merchant.id}/favorite_customer"
-
-      actual_response = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(actual_response['id']).to eq(customer.id)
-      expect(actual_response['first_name']).to eq(customer.first_name)
-    end
-  end
+  # context 'GET /api/v1/merchants/:id/favorite_customer' do
+  #   it 'can get favorite customer by its id for a merchant' do
+  #     merchant = create(:merchant)
+  #     customer = create(:customer)
+  #     customer_2 = create(:customer)
+  #     invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+  #     invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+  #     invoice3 = create(:invoice, customer_id: customer_2.id, merchant_id: merchant.id)
+  #
+  #     get "/api/v1/merchants/#{merchant.id}/favorite_customer"
+  #
+  #     actual_response = JSON.parse(response.body)
+  #
+  #     expect(response).to be_successful
+  #     expect(actual_response['id']).to eq(customer.id)
+  #     expect(actual_response['first_name']).to eq(customer.first_name)
+  #   end
+  # end
   # relationships endpoint
   context 'GET /api/v1/merchants/:id/items' do
     it 'returns a collection of items associated with that merchant' do
@@ -88,7 +88,7 @@ describe 'Merchants API' do
       expect(invoices.count).to eq(3)
     end
   end
-      
+
   context 'GET /api/v1/merchants/:id/revenue' do
     it 'can get total revenue for a merchant' do
       merchant = create(:merchant)
