@@ -11,7 +11,6 @@ class Api::V1::InvoiceItems::SearchController < ApplicationController
   end
 
   def index
-    # render json: InvoiceItem.where(search_params)
     render json: InvoiceItem.where('unit_price=?', (params[:unit_price].to_d*100).to_i) if params[:unit_price]
     render json: InvoiceItem.where('id=?', params[:id]) if params[:id]
     render json: InvoiceItem.where('item_id=?', params[:item_id]) if params[:item_id]
