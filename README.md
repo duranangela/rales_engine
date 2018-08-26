@@ -24,3 +24,4 @@ To get this project on your own machine:
 6. To start and interact with the server on your local machine, run
   * `rails s`
 7. Now you can interact with the app at localhost:3000 using the endpoints listed in the rubric above.
+# rales_engine
